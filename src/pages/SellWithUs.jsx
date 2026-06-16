@@ -32,7 +32,7 @@ export default function SellWithUs({ onAddProperty }) {
     // --- DB WALI CHEEZ ADDED HERE ---
     try {
       // Backend ko parallel data send karne ke liye setup
-      await fetch('http://localhost:5000/api/properties', {
+      await fetch('https://horizon-realty-backend-production.up.railway.app/api/properties', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
