@@ -43,8 +43,9 @@ const INITIAL_PROPERTIES = [
     price: 3100000, 
     location: "Miami, FL", 
     beds: 3, baths: 4, sqft: 3100, type: "condo", 
-    // Image updated to be unique
-    image: "https://images.unsplash.com/photo-1599809275671-b3334f5979c5?q=80&w=600", 
+    
+  image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=600", 
+
     description: "Breathtaking direct oceanfront penthouse." 
   },
   { 
