@@ -879,3 +879,49 @@ html, body {
     text-align: left !important;
   }
 }
+/* ==========================================================================
+   PRICING CARD CONTAINER WIDTH EMERGENCY OVERWRITE
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Card ke parent container ko force karna ke woh mobile boundary se baahir na jaye */
+  .split-details-layout {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 15px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* White Card ko tightly safe limits ke andar set karna */
+  .sticky-booking-card {
+    position: relative !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 20px 0 0 0 !important;
+    padding: 20px !important;
+    box-sizing: border-box !important; /* padding card se baahir nahi, andar push karegi */
+    overflow: hidden !important; /* content ko bounding box se baahir jane se rokega */
+  }
+
+  /* Form elements and wrapping wrappers protection */
+  .sticky-booking-card form,
+  .sticky-booking-card div,
+  .sticky-booking-card p {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Input spaces and Schedule button tight alignment inside the white box */
+  .sticky-booking-card input,
+  .sticky-booking-card input[type="date"],
+  .submit-tour-btn,
+  [class*="Schedule Private Tour"],
+  button[class*="tour"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
