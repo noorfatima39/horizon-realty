@@ -651,3 +651,231 @@ html, body {
     position: relative !important; /* Kisi bhi absolute position ko control karne ke liye */
   }
 }
+/* ==========================================================================
+   COMBINED MOBILE REPAIR ENGINE (FOR NAVBAR, HERO, SPECS & PRICING)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  
+  /* 1. NAVBAR & HAMBURGER FLEX ORDER FIX */
+  .navbar {
+    padding: 15px 5% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    position: relative !important;
+  }
+
+  .navbar-logo {
+    font-size: 1.1rem !important;
+    flex: 1 !important;
+  }
+
+  /* Schedule Tour will come before hamburger on mobile screens */
+  .navbar-cta-btn {
+    order: 2 !important;
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap !important;
+    margin: 0 !important;
+    display: inline-block !important;
+  }
+
+  /* Hamburger pushed to the absolute right side */
+  .hamburger {
+    display: flex !important;
+    order: 3 !important;
+    margin-left: 15px !important;
+    z-index: 1001 !important;
+  }
+
+  /* Mobile Links Dropdown Panel styling */
+  .navbar-links {
+    display: none !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    padding: 15px 0 !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+    z-index: 1000 !important;
+    order: 4 !important;
+  }
+
+  .navbar-links.show-mobile-menu {
+    display: flex !important;
+  }
+
+  .navbar-links .nav-item {
+    padding: 12px 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+    border: none !important;
+    color: #333333 !important;
+  }
+
+  /* 2. HERO IMAGE REPAIR (Stops image from half cutting) */
+  .hero {
+    flex-direction: column !important;
+    padding: 30px 5% !important;
+    gap: 35px !important;
+    text-align: center !important;
+  }
+
+  .hero-text {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .hero-img-box {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+  }
+
+  .hero-img-box img {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 320px !important;
+    object-fit: cover !important;
+    border-radius: 12px !important;
+    display: block !important;
+  }
+
+  /* 3. HERO BUTTONS OVERLAP FIX (Explore & Book Consultation stack setup) */
+  .hero-text div, 
+  .hero-buttons-container,
+  .hero-text form {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .primary-btn, 
+  .secondary-btn,
+  .hero-text .primary-btn,
+  .hero-text .secondary-btn {
+    display: block !important;
+    width: 90% !important;
+    max-width: 280px !important;
+    margin: 0 !important;
+    padding: 12px 0 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+  }
+
+  /* 4. PROPERTY SPECS & BADGES WRAP (Bedrooms, Bathrooms grid lock) */
+  .pill-specs-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 12px !important;
+    justify-content: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0 10px !important;
+  }
+
+  .pill-specs-row span {
+    flex: 1 1 calc(50% - 12px) !important;
+    min-width: 120px !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+
+  /* 5. LISTED PRICING & DATE BOX OVERFLOW REPAIR */
+  .split-details-layout {
+    grid-template-columns: 1fr !important;
+    padding: 20px 4% !important;
+    gap: 30px !important;
+  }
+
+  .sticky-booking-card {
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+    border-radius: 12px !important;
+  }
+
+  .sidebar-price {
+    font-size: 1.7rem !important;
+    margin: 10px 0 !important;
+    text-align: center !important;
+  }
+
+  .sticky-booking-card form,
+  .sticky-booking-card div {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Border box settings for inputs to trap width inside cards */
+  .sticky-booking-card input, 
+  .sticky-booking-card select,
+  .sticky-booking-card input[type="date"] {
+    width: 100% !important;
+    max-width: 100% !important;
+    padding: 12px 15px !important;
+    margin: 8px 0 16px 0 !important;
+    box-sizing: border-box !important;
+    display: block !important;
+  }
+
+  .submit-tour-btn {
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
+/* ==========================================================================
+   AGENT PROFILE CARDS IMAGES CRITICAL FIX (FOR ALL SCREENS)
+   ========================================================================== */
+
+/* 1. DESKTOP & TABLET VIEW */
+.agent-profile-card {
+  display: flex !important;
+  background: var(--white);
+  border-radius: 12px !important;
+  overflow: hidden !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  width: 100% !important;
+}
+
+/* Image section handler */
+.agent-profile-card img {
+  width: 200px !important; /* Fixed width side placement */
+  height: 260px !important; /* Thoda container bada kiya taake face adjust ho */
+  object-fit: cover !important;
+  object-position: top center !important; /* CRITICAL: Crop bottom se hoga, face hamesha safe rahega */
+  display: block !important;
+}
+
+/* 2. STRICT MOBILE VIEW UP-DOWN STACK */
+@media (max-width: 768px) {
+  .agent-profile-card {
+    flex-direction: column !important; /* Mobile par up-down display stack */
+    max-width: 340px !important; /* Center visibility grid box */
+    margin: 0 auto 20px auto !important;
+  }
+
+  .agent-profile-card img {
+    width: 100% !important; /* Pure card ki width cover karega */
+    height: 280px !important; /* Mobile height lock taake pic stretch na ho */
+    object-fit: cover !important;
+    object-position: top center !important; /* Chehra upar se bilkul saaf dikhega */
+  }
+  
+  .agent-meta {
+    padding: 20px !important;
+    text-align: left !important;
+  }
+}
