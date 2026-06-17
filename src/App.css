@@ -7,37 +7,519 @@
   --gray: #1d1818;
 }
 
-html, body { margin: 0; padding: 0; width: 100%; max-width: 100vw; overflow-x: hidden; font-family: 'Inter', sans-serif; background-color: var(--cream); color: var(--charcoal); }
-
-.app-container { display: flex; flex-direction: column; min-height: 100vh; width: 100%; overflow-x: hidden; }
-.main-content { flex: 1; width: 100%; position: relative; overflow: hidden; }
-
-/* Navbar & Hero - Keep existing */
-.navbar { display: flex; justify-content: space-between; align-items: center; padding: 24px 6%; background-color: var(--white); border-bottom: 1px solid rgba(0,0,0,0.05); }
-.hero { display: flex; align-items: center; justify-content: space-between; padding: 60px 6%; gap: 5%; }
-.hero-img-box img { width: 100%; height: 480px; object-fit: cover; border-radius: 12px; }
-
-/* Property Card Fixes (Updated for images) */
-.property-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s ease; }
-.img-container { position: relative; width: 100%; height: 220px; overflow: hidden; }
-.img-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
-
-/* All your previous styles (Services, Search, Details, Panels, Footer) remain EXACTLY as they were */
-.grid-3-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
-.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-.split-panel-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
-.footer-system { background-color: var(--green); color: var(--white); padding: 60px 6% 20px 6%; margin-top: 80px; }
-
-/* --- RESPONSIVE UPDATES (Added to your existing code) --- */
-@media (max-width: 992px) {
-  .grid-3-col { grid-template-columns: repeat(2, 1fr); }
-  .hero { flex-direction: column; text-align: center; }
+/* Global Reset & Body Lock to prevent extra empty spaces */
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--cream);
+  color: var(--charcoal);
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: auto !important; /* Framer motion ke shiver ko rokne ke liye */
 }
 
+/* Layout Container Boilerplate */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.main-content {
+  flex: 1; /* Footer ko hamesha screen ke bilkul end par block karke rakhega */
+  width: 100%;
+  position: relative;
+  overflow: hidden; /* Framer motion ki vajah se jo extra space banti hai usko hide karega */
+}
+
+/* NAVBAR PLATFORM */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 6%;
+  background-color: var(--white);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.navbar-logo {
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--green);
+  font-size: 1.3rem;
+  letter-spacing: 1px;
+}
+.logo-sub { font-weight: 300; color: var(--gold); }
+.navbar-links .nav-item {
+  text-decoration: none;
+  color: var(--charcoal);
+  margin: 0 16px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+.navbar-links .nav-item.active { 
+  color: var(--green); 
+  border-bottom: 2px solid var(--gold); 
+  padding-bottom: 4px; 
+}
+.navbar-cta-btn {
+  background-color: var(--green);
+  color: var(--white);
+  text-decoration: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+/* LAYOUT ENGINE SHEETS */
+.page-padding { padding: 60px 6%; }
+.centered-header { text-align: center; margin-bottom: 50px; }
+.centered-header h2 { font-size: 2.2rem; color: var(--green); }
+.grid-3-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
+.grid-2-col { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+.max-width-900 { max-width: 900px; margin: 0 auto; }
+
+/* HERO INTERFACE MODULE */
+.hero { display: flex; align-items: center; justify-content: space-between; padding: 60px 6%; gap: 5%; }
+.hero-text { flex: 1; }
+.hero-text .sub-title { font-size: 0.85rem; font-weight: 700; color: var(--gold); letter-spacing: 1.5px; }
+.hero-text h1 { font-size: 3.5rem; color: var(--green); line-height: 1.1; margin: 15px 0; }
+.hero-text .highlight { color: var(--gold); font-style: italic; }
+.hero-img-box { flex: 1; }
+.hero-img-box img { width: 100%; height: 480px; object-fit: cover; border-radius: 12px; }
+.primary-btn { background-color: var(--green); color: var(--white); border: none; padding: 14px 28px; font-weight: 600; border-radius: 4px; cursor: pointer; margin-right: 15px; }
+.secondary-btn { background-color: transparent; color: var(--green); border: 1px solid var(--green); padding: 14px 28px; font-weight: 600; border-radius: 4px; cursor: pointer; }
+
+/* SERVICE AND VALUE MATRIX CARDS */
+.simple-stress-free { padding: 60px 6%; background-color: var(--white); text-align: center; }
+.services-mini-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+.s-box { padding: 30px; background: var(--cream); border-radius: 8px; border-top: 4px solid var(--green); }
+
+/* PRODUCT CARD ENGINE STYLE MAPS */
+.property-card { background: var(--white); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.04); transition: transform 0.2s ease; }
+.property-card:hover { transform: translateY(-4px); }
+.img-container { position: relative; }
+.img-container img { width: 100%; height: 220px; object-fit: cover; }
+.tag-badge { position: absolute; top: 12px; left: 12px; background: var(--white); color: var(--green); font-size: 0.75rem; font-weight: 700; padding: 4px 8px; border-radius: 4px; text-transform: uppercase; }
+.card-info { padding: 20px; }
+.card-info h3 { margin: 0 0 5px 0; font-size: 1.2rem; color: var(--charcoal); }
+.card-info .loc { color: var(--gray); font-size: 0.85rem; margin-bottom: 10px; }
+.card-info .price { font-size: 1.4rem; color: var(--green); font-weight: 700; margin: 10px 0; }
+.card-info .specs { font-size: 0.85rem; color: var(--gray); margin-bottom: 15px; }
+.view-link { text-decoration: none; color: var(--gold); font-weight: 600; font-size: 0.9rem; }
+
+/* SEARCH SPLIT APP LAYOUTS */
+.search-page-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding: 40px 6%; }
+.filter-sidebar { background: var(--white); padding: 25px; border-radius: 8px; height: fit-content; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+.input-group { margin-bottom: 20px; }
+.input-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 6px; }
+.input-group input[type="text"], .input-group select { width: 100%; padding: 10px; border: 1px solid #dddddd; border-radius: 4px; box-sizing: border-box; }
+.input-group input[type="range"] { width: 100%; }
+.empty-state { padding: 40px; text-align: center; color: var(--gray); background: var(--white); border-radius: 8px; }
+
+/* SPECIFICATION DETAIL PRESENTATION SHEETS */
+.wide-detail-img { width: 100%; height: 450px; object-fit: cover; }
+.split-details-layout { display: grid; grid-template-columns: 1fr 360px; gap: 50px; padding: 50px 6%; }
+.pill-specs-row { display: flex; gap: 20px; margin: 20px 0; }
+.pill-specs-row span { background: var(--white); padding: 8px 16px; border-radius: 20px; font-size: 0.9rem; font-weight: 500; box-shadow: 0 2px 6px rgba(0,0,0,0.03); }
+.long-desc { line-height: 1.6; color: #4a5568; }
+.sticky-booking-card { background: var(--white); padding: 30px; border-radius: 8px; position: sticky; top: 40px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); }
+.sidebar-price { font-size: 2rem; color: var(--green); font-weight: 800; margin: 10px 0 20px 0; }
+.sticky-booking-card label { font-size: 0.85rem; font-weight: 600; display: block; margin-top: 10px; }
+.sticky-booking-card input { width: 100%; padding: 12px; margin: 6px 0 16px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+.submit-tour-btn { width: 100%; background: var(--green); color: var(--white); border: none; padding: 14px; border-radius: 4px; font-weight: 700; cursor: pointer; margin-top: 10px; }
+.success-banner { background: #E6F4EA; color: #137333; padding: 15px; border-radius: 4px; font-size: 0.9rem; text-align: center; font-weight: 600; }
+
+/* CAPTURE FORM STRUCTURAL PANELS */
+.split-panel-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
+.panel-box { padding: 80px 12%; display: flex; flex-direction: column; justify-content: center; }
+.light-cream-bg { background-color: var(--white); }
+.dark-green-bg { background-color: var(--green); }
+.panel-box h3 { font-size: 2rem; margin-bottom: 24px; }
+.panel-box form label { font-size: 0.85rem; font-weight: 600; display: block; margin-bottom: 5px; }
+.panel-box input, .panel-box select { width: 100%; padding: 14px; margin-bottom: 20px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+.dark-form input, .dark-form select { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: var(--white); }
+.dark-form input::placeholder { color: rgba(255,255,255,0.5); }
+.valuation-btn { background: var(--green); color: var(--white); border: none; padding: 14px 28px; font-weight: 600; border-radius: 4px; cursor: pointer; width: fit-content; }
+.gold-submit-btn { background: var(--gold); color: var(--green); border: none; padding: 14px 28px; font-weight: 700; border-radius: 4px; cursor: pointer; }
+.valuation-display { margin-top: 25px; padding: 20px; background: var(--cream); border-radius: 6px; }
+.val-figure { font-size: 2.8rem; color: var(--green); font-weight: 800; margin: 10px 0 5px 0; }
+
+/* ADVISORY TEAM MAPS & BLOG POST LAYOUTS */
+.agent-profile-card, .blog-item-card { background: var(--white); border-radius: 8px; overflow: hidden; display: flex; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+.agent-profile-card img, .blog-item-card img { width: 180px; height: 220px; object-fit: cover; }
+.agent-meta, .blog-info { padding: 25px; display: flex; flex-direction: column; justify-content: center; flex: 1; }
+.role-tag, .blog-tag { color: var(--gold); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 8px; text-transform: uppercase; }
+.agent-meta p { margin: 4px 0; font-size: 0.9rem; color: var(--gray); }
+.connect-btn { background: var(--cream); border: none; padding: 8px 16px; font-weight: 600; color: var(--green); cursor: pointer; margin-top: 14px; width: fit-content; border-radius: 4px; }
+.blog-date { color: var(--gray); font-size: 0.8rem; margin-top: 5px; }
+
+/* APPLICATION GLOBAL FOOTER SYSTEM */
+.footer-system { background-color: var(--green); color: var(--white); padding: 60px 6% 20px 6%; margin-top: 80px; }
+.footer-content { display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 30px; }
+.footer-content h4 { margin: 0 0 10px 0; font-size: 1.2rem; }
+.footer-content h5 { margin: 0 0 15px 0; font-size: 1rem; color: var(--gold); }
+.footer-content p { margin: 5px 0; font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+.footer-bar { text-align: center; font-size: 0.8rem; color: rgba(255,255,255,0.4); padding-top: 20px; }
+
+/* Blog Card Master Layout Fix */
+.blog-item-card {
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column; /* Components vertical align honge taake space break na ho */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+  height: 100%; /* Card ko exact proper box size milega */
+}
+
+/* Image wrapper content wrapper control block */
+.blog-img-wrapper {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+
+.blog-item-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Image bina stretch ya break hue pure box me fit hogi */
+  display: block;
+}
+
+/* Blog Info Layout Control */
+.blog-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
+
+.blog-tag {
+  color: var(--gold);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.blog-info h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--charcoal);
+  line-height: 1.4;
+}
+
+.blog-date {
+  margin-top: auto; /* Date hamesha card ke bilkul bottom par automatic adjust hogi */
+  color: var(--gray);
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   SELL WITH US PAGE - PREMIUM RE-STYLING (REPLACES NEON GREEN & BROWN)
+   ========================================================================== */
+
+/* Poore Split Panel Page Section ka Background Layout */
+.split-panel-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 85vh;
+  gap: 20px;
+  padding: 40px 6%;
+  background-color: transparent; /* Neon backgrounds clear */
+}
+
+/* Dono Panels (Left & Right) ka Glass Box Setup */
+.panel-box {
+  padding: 50px 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  height: 100%;
+}
+
+/* LEFT SIDE PANEL (Pehle light cream tha - Ab Deep Blue Gradient hai) */
+.panel-box.light-cream-bg {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(37, 99, 235, 0.15)) !important;
+}
+
+/* RIGHT SIDE PANEL (Jo Pehle Neon Green tha - Ab Deep Midnight Black/Blue hai) */
+.panel-box.dark-green-bg {
+  background: linear-gradient(135deg, rgba(7, 11, 25, 0.85), rgba(15, 23, 42, 0.9)) !important;
+}
+
+/* Headings Aur Labels Styling */
+.panel-box h3 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: var(--text-white);
+  letter-spacing: -0.5px;
+}
+
+/* Right Side ki Heading ko explicitly Gold accent dene ke liye */
+.panel-box.dark-green-bg h3 {
+  color: var(--gold);
+  text-shadow: 0 0 15px rgba(223, 183, 108, 0.2);
+}
+
+.panel-box form label {
+  color: var(--text-gray);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+/* Input Fields & Select Boxes Modernizer */
+.panel-box input, 
+.panel-box select {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 22px;
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  color: var(--text-white) !important;
+  font-size: 0.95rem;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.panel-box input:focus, 
+.panel-box select:focus {
+  outline: none;
+  border-color: var(--royal-blue) !important;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.3);
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Placeholder adjustments */
+.panel-box input::placeholder {
+  color: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* ==========================================================================
+   BUTTON RE-DESIGN (REPLACES NEON GREEN & BROWN BUTTONS)
+   ========================================================================== */
+
+/* Left Side Button (Pehle green tha - Ab Royal Blue Glow Button hai) */
+.valuation-btn {
+  background: linear-gradient(135deg, var(--royal-blue), var(--blue-glow)) !important;
+  color: var(--text-white) !important;
+  border: none !important;
+  padding: 14px 32px !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem;
+  border-radius: 8px !important;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+  transition: all 0.3s ease !important;
+  width: fit-content;
+}
+
+.valuation-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
+}
+
+/* Right Side Button (Pehle brown/muddy tha - Ab Solid Luxury Gold Button hai) */
+.gold-submit-btn {
+  background: var(--gold) !important;
+  color: var(--bg-dark) !important; /* Dark text on gold button for high contrast luxury look */
+  border: none !important;
+  padding: 14px 32px !important;
+  font-weight: 700 !important;
+  font-size: 0.95rem;
+  border-radius: 8px !important;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(223, 183, 108, 0.2);
+  transition: all 0.3s ease !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gold-submit-btn:hover {
+  background: var(--gold-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(223, 183, 108, 0.4);
+}
+
+/* Output Valuation Result Display Box */
+.valuation-display {
+  background: rgba(255, 255, 255, 0.03) !important;
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.val-figure {
+  color: var(--gold) !important;
+  text-shadow: 0 0 12px rgba(223, 183, 108, 0.3);
+}
+
+/* ==========================================================================
+   GLOBAL FOOTER RE-STYLING (CLEAN WHITE THEME WITH DARK TEXT)
+   ========================================================================== */
+
+.footer-system {
+  background-color: #ffffff !important; 
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important; /* Soft light border */
+  color: #222222 !important; /* Dark charcoal text for high readability */
+  padding: 60px 6% 25px 6% !important;
+  margin-top: 100px !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Footer Section Layout Alignment */
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important; /* Soft divider line */
+  padding-bottom: 40px !important;
+}
+
+/* Horizon Realty Left Main Title */
+.footer-content h4 {
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 1px;
+  margin: 0 0 12px 0 !important;
+  color: #505463 !important; /* Premium dark blue/black for title */
+}
+
+/* Main description text under title */
+.footer-content p {
+  color: #64748b !important; /* Soft elegant gray text */
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  max-width: 400px;
+}
+
+/* Contact Info Right Text Heading */
+.footer-content h5 {
+  color: #11e6b0 !important; /* Royal Blue color for contact heading to match your theme */
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 20px 0 !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Contact information metadata elements */
+.footer-content .contact-info-text {
+  color: #334155 !important; /* Dark text for contact elements */
+  font-size: 0.95rem !important;
+  margin-bottom: 10px !important;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Bottom CopyRight Bar System */
+.footer-bar {
+  text-align: center !important;
+  font-size: 0.85rem !important;
+  color: #94a3b8 !important; /* Muted gray for copyright */
+  padding-top: 25px !important;
+  margin-top: 0 !important;
+  border-top: none !important;
+}
+
+/* Image display fix */
+.property-card .img-container {
+  width: 100%;
+  height: 220px; /* Container ko fixed height dena zaroori hai */
+  overflow: hidden;
+  position: relative;
+}
+
+.property-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover; /* Ye line image ko bina kharab kiye box mein fit kar degi */
+  display: block;
+}
+
+/* --- MASTER RESPONSIVE BREAKPOINTS (STRICT ENFORCEMENT) --- */
+
+/* Laptop ke liye minor adjustment stretch rokne k liye */
+@media (max-width: 1200px) {
+  .hero { gap: 3%; padding: 40px 4%; }
+  .hero-text h1 { font-size: 3rem; }
+}
+
+/* Tablet ke liye (Screens width 992px se kam) */
+@media (max-width: 992px) {
+  .grid-3-col {
+    grid-template-columns: repeat(2, 1fr) !important; /* 3 column se 2 column ho jayenge */
+  }
+  .hero {
+    flex-direction: column !important;
+    text-align: center !important;
+    padding: 40px 6% !important;
+  }
+  .hero-img-box { width: 100% !important; margin-top: 20px; }
+  .services-mini-grid { grid-template-columns: repeat(2, 1fr) !important; }
+}
+
+/* Mobile ke liye (Screens width 768px se kam) */
 @media (max-width: 768px) {
-  .grid-3-col, .grid-2-col, .split-panel-container { grid-template-columns: 1fr; }
-  .navbar-links { display: none; }
-  .hero-text h1 { font-size: 2.2rem; }
-  .search-page-layout { grid-template-columns: 1fr; }
-  .panel-box { padding: 40px 6%; }
+  .grid-3-col, .grid-2-col, .services-mini-grid, .split-details-layout {
+    grid-template-columns: 1fr !important; /* Sab kuch 1 single stacked column mein aa jayega */
+  }
+  .navbar {
+    padding: 16px 4% !important;
+  }
+  .navbar-links {
+    display: none !important; /* Mobile mein default links collapse */
+  }
+  .hero {
+    padding: 30px 4% !important;
+  }
+  .hero-text h1 {
+    font-size: 2.2rem !important; /* Heading compact sizes */
+  }
+  .hero-img-box img {
+    height: 320px !important; /* Responsive box limits */
+  }
+  .split-panel-container {
+    grid-template-columns: 1fr !important; /* Sell page ke dono box properly stack ho jayenge */
+    padding: 20px 4% !important;
+  }
+  .panel-box {
+    padding: 40px 6% !important;
+  }
+  .search-page-layout {
+    grid-template-columns: 1fr !important; /* Search filter top par safe shift ho jayega */
+    padding: 20px 4% !important;
+  }
+  .footer-content {
+    flex-direction: column !important;
+    gap: 30px !important;
+  }
+  .agent-profile-card, .blog-item-card {
+    flex-direction: column !important; /* Horizontal items automatically compact vertical layout */
+  }
+  .agent-profile-card img {
+    width: 100% !important;
+    height: 250px !important;
+  }
 }
