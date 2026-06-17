@@ -45,6 +45,8 @@ html, body {
   padding: 24px 6%;
   background-color: var(--white);
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  position: relative;
+  z-index: 1000;
 }
 .navbar-logo {
   font-weight: 800;
@@ -75,6 +77,26 @@ html, body {
   border-radius: 4px;
   font-weight: 600;
   font-size: 0.9rem;
+}
+
+/* HAMBURGER BUTTON STYLING (Default Desktop: Hidden) */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 1001;
+}
+.hamburger .bar {
+  width: 100%;
+  height: 2px;
+  background-color: var(--green);
+  transition: all 0.3s ease;
 }
 
 /* LAYOUT ENGINE SHEETS */
@@ -174,9 +196,9 @@ html, body {
   border-radius: 8px;
   overflow: hidden;
   display: flex;
-  flex-direction: column; /* Components vertical align honge taake space break na ho */
+  flex-direction: column; 
   box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-  height: 100%; /* Card ko exact proper box size milega */
+  height: 100%; 
 }
 
 /* Image wrapper content wrapper control block */
@@ -190,7 +212,7 @@ html, body {
 .blog-item-card img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Image bina stretch ya break hue pure box me fit hogi */
+  object-fit: cover; 
   display: block;
 }
 
@@ -219,7 +241,7 @@ html, body {
 }
 
 .blog-date {
-  margin-top: auto; /* Date hamesha card ke bilkul bottom par automatic adjust hogi */
+  margin-top: auto; 
   color: var(--gray);
   font-size: 0.8rem;
 }
@@ -227,18 +249,15 @@ html, body {
 /* ==========================================================================
    SELL WITH US PAGE - PREMIUM RE-STYLING (REPLACES NEON GREEN & BROWN)
    ========================================================================== */
-
-/* Poore Split Panel Page Section ka Background Layout */
 .split-panel-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 85vh;
   gap: 20px;
   padding: 40px 6%;
-  background-color: transparent; /* Neon backgrounds clear */
+  background-color: transparent; 
 }
 
-/* Dono Panels (Left & Right) ka Glass Box Setup */
 .panel-box {
   padding: 50px 8%;
   display: flex;
@@ -252,17 +271,14 @@ html, body {
   height: 100%;
 }
 
-/* LEFT SIDE PANEL (Pehle light cream tha - Ab Deep Blue Gradient hai) */
 .panel-box.light-cream-bg {
   background: linear-gradient(135deg, rgba(15, 23, 42, 0.7), rgba(37, 99, 235, 0.15)) !important;
 }
 
-/* RIGHT SIDE PANEL (Jo Pehle Neon Green tha - Ab Deep Midnight Black/Blue hai) */
 .panel-box.dark-green-bg {
   background: linear-gradient(135deg, rgba(7, 11, 25, 0.85), rgba(15, 23, 42, 0.9)) !important;
 }
 
-/* Headings Aur Labels Styling */
 .panel-box h3 {
   font-size: 2.2rem;
   font-weight: 700;
@@ -271,7 +287,6 @@ html, body {
   letter-spacing: -0.5px;
 }
 
-/* Right Side ki Heading ko explicitly Gold accent dene ke liye */
 .panel-box.dark-green-bg h3 {
   color: var(--gold);
   text-shadow: 0 0 15px rgba(223, 183, 108, 0.2);
@@ -285,7 +300,6 @@ html, body {
   margin-bottom: 8px;
 }
 
-/* Input Fields & Select Boxes Modernizer */
 .panel-box input, 
 .panel-box select {
   width: 100%;
@@ -308,16 +322,11 @@ html, body {
   background: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* Placeholder adjustments */
 .panel-box input::placeholder {
   color: rgba(255, 255, 255, 0.3) !important;
 }
 
-/* ==========================================================================
-   BUTTON RE-DESIGN (REPLACES NEON GREEN & BROWN BUTTONS)
-   ========================================================================== */
-
-/* Left Side Button (Pehle green tha - Ab Royal Blue Glow Button hai) */
+/* BUTTON RE-DESIGN */
 .valuation-btn {
   background: linear-gradient(135deg, var(--royal-blue), var(--blue-glow)) !important;
   color: var(--text-white) !important;
@@ -337,10 +346,9 @@ html, body {
   box-shadow: 0 6px 20px rgba(37, 99, 235, 0.5);
 }
 
-/* Right Side Button (Pehle brown/muddy tha - Ab Solid Luxury Gold Button hai) */
 .gold-submit-btn {
   background: var(--gold) !important;
-  color: var(--bg-dark) !important; /* Dark text on gold button for high contrast luxury look */
+  color: var(--bg-dark) !important; 
   border: none !important;
   padding: 14px 32px !important;
   font-weight: 700 !important;
@@ -359,7 +367,6 @@ html, body {
   box-shadow: 0 6px 22px rgba(223, 183, 108, 0.4);
 }
 
-/* Output Valuation Result Display Box */
 .valuation-display {
   background: rgba(255, 255, 255, 0.03) !important;
   border: 1px solid var(--glass-border);
@@ -373,49 +380,42 @@ html, body {
   text-shadow: 0 0 12px rgba(223, 183, 108, 0.3);
 }
 
-/* ==========================================================================
-   GLOBAL FOOTER RE-STYLING (CLEAN WHITE THEME WITH DARK TEXT)
-   ========================================================================== */
-
+/* GLOBAL FOOTER RE-STYLING */
 .footer-system {
   background-color: #ffffff !important; 
-  border-top: 1px solid rgba(0, 0, 0, 0.06) !important; /* Soft light border */
-  color: #222222 !important; /* Dark charcoal text for high readability */
+  border-top: 1px solid rgba(0, 0, 0, 0.06) !important; 
+  color: #222222 !important; 
   padding: 60px 6% 25px 6% !important;
   margin-top: 100px !important;
   width: 100%;
   box-sizing: border-box;
 }
 
-/* Footer Section Layout Alignment */
 .footer-content {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important; /* Soft divider line */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05) !important; 
   padding-bottom: 40px !important;
 }
 
-/* Horizon Realty Left Main Title */
 .footer-content h4 {
   font-size: 1.5rem !important;
   font-weight: 800 !important;
   letter-spacing: 1px;
   margin: 0 0 12px 0 !important;
-  color: #505463 !important; /* Premium dark blue/black for title */
+  color: #505463 !important; 
 }
 
-/* Main description text under title */
 .footer-content p {
-  color: #64748b !important; /* Soft elegant gray text */
+  color: #64748b !important; 
   font-size: 0.95rem !important;
   line-height: 1.6 !important;
   max-width: 400px;
 }
 
-/* Contact Info Right Text Heading */
 .footer-content h5 {
-  color: #11e6b0 !important; /* Royal Blue color for contact heading to match your theme */
+  color: #11e6b0 !important; 
   font-size: 1.1rem !important;
   font-weight: 700 !important;
   margin: 0 0 20px 0 !important;
@@ -423,9 +423,8 @@ html, body {
   letter-spacing: 1px;
 }
 
-/* Contact information metadata elements */
 .footer-content .contact-info-text {
-  color: #334155 !important; /* Dark text for contact elements */
+  color: #334155 !important; 
   font-size: 0.95rem !important;
   margin-bottom: 10px !important;
   display: flex;
@@ -433,11 +432,10 @@ html, body {
   gap: 8px;
 }
 
-/* Bottom CopyRight Bar System */
 .footer-bar {
   text-align: center !important;
   font-size: 0.85rem !important;
-  color: #94a3b8 !important; /* Muted gray for copyright */
+  color: #94a3b8 !important; 
   padding-top: 25px !important;
   margin-top: 0 !important;
   border-top: none !important;
@@ -446,7 +444,7 @@ html, body {
 /* Image display fix */
 .property-card .img-container {
   width: 100%;
-  height: 220px; /* Container ko fixed height dena zaroori hai */
+  height: 220px; 
   overflow: hidden;
   position: relative;
 }
@@ -454,72 +452,106 @@ html, body {
 .property-card img {
   width: 100%;
   height: 220px;
-  object-fit: cover; /* Ye line image ko bina kharab kiye box mein fit kar degi */
+  object-fit: cover; 
   display: block;
 }
 
-/* --- MASTER RESPONSIVE BREAKPOINTS (STRICT ENFORCEMENT) --- */
+/* ==========================================================================
+   STRICT RESPONSIVE FIXES AND HAMBURGER ENGINE
+   ========================================================================== */
 
-/* Laptop ke liye minor adjustment stretch rokne k liye */
-@media (max-width: 1200px) {
-  .hero { gap: 3%; padding: 40px 4%; }
-  .hero-text h1 { font-size: 3rem; }
-}
-
-/* Tablet ke liye (Screens width 992px se kam) */
 @media (max-width: 992px) {
   .grid-3-col {
-    grid-template-columns: repeat(2, 1fr) !important; /* 3 column se 2 column ho jayenge */
+    grid-template-columns: repeat(2, 1fr) !important;
   }
   .hero {
     flex-direction: column !important;
     text-align: center !important;
     padding: 40px 6% !important;
   }
-  .hero-img-box { width: 100% !important; margin-top: 20px; }
+  .hero-img-box { width: 100% !important; margin-top: 25px; }
+  .hero-img-box img { height: 380px !important; width: 100% !important; }
   .services-mini-grid { grid-template-columns: repeat(2, 1fr) !important; }
 }
 
-/* Mobile ke liye (Screens width 768px se kam) */
 @media (max-width: 768px) {
+  /* Dynamic Grids Conversion */
   .grid-3-col, .grid-2-col, .services-mini-grid, .split-details-layout {
-    grid-template-columns: 1fr !important; /* Sab kuch 1 single stacked column mein aa jayega */
+    grid-template-columns: 1fr !important;
+    width: 100% !important;
   }
-  .navbar {
-    padding: 16px 4% !important;
+
+  /* Structural fixes to prevent half images */
+  .hero-img-box, .hero-text, .property-card, .agent-profile-card {
+    width: 100% !important;
+    box-sizing: border-box !important;
   }
-  .navbar-links {
-    display: none !important; /* Mobile mein default links collapse */
-  }
-  .hero {
-    padding: 30px 4% !important;
-  }
-  .hero-text h1 {
-    font-size: 2.2rem !important; /* Heading compact sizes */
-  }
+  
   .hero-img-box img {
-    height: 320px !important; /* Responsive box limits */
+    height: 300px !important;
+    width: 100% !important;
+    object-fit: cover !important;
   }
+
+  .agent-profile-card {
+    flex-direction: column !important;
+  }
+  
+  .agent-profile-card img {
+    width: 100% !important;
+    height: 280px !important;
+    object-fit: cover !important;
+  }
+
+  /* Hamburger View Toggle Engine */
+  .hamburger {
+    display: flex !important; /* Mobile view par buttons active */
+  }
+
+  /* Hamburger transform effects */
+  .hamburger.open .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.open .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  .navbar-links {
+    display: none !important; /* Normal hidden tracking */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--white);
+    padding: 20px 0 !important;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.05);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* Class triggered via React state */
+  .navbar-links.show-mobile-menu {
+    display: flex !important;
+  }
+
+  .navbar-links .nav-item {
+    margin: 12px 0 !important;
+    text-align: center;
+    width: 100%;
+  }
+
   .split-panel-container {
-    grid-template-columns: 1fr !important; /* Sell page ke dono box properly stack ho jayenge */
+    grid-template-columns: 1fr !important;
     padding: 20px 4% !important;
-  }
-  .panel-box {
-    padding: 40px 6% !important;
   }
   .search-page-layout {
-    grid-template-columns: 1fr !important; /* Search filter top par safe shift ho jayega */
-    padding: 20px 4% !important;
+    grid-template-columns: 1fr !important;
   }
   .footer-content {
     flex-direction: column !important;
     gap: 30px !important;
-  }
-  .agent-profile-card, .blog-item-card {
-    flex-direction: column !important; /* Horizontal items automatically compact vertical layout */
-  }
-  .agent-profile-card img {
-    width: 100% !important;
-    height: 250px !important;
   }
 }
