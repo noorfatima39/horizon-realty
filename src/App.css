@@ -555,3 +555,99 @@ html, body {
     gap: 30px !important;
   }
 }
+/* ==========================================================================
+   STRICT MOBILE REPAIR (FOR NOOR'S EXACT NAVBAR STRUCTURE)
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* 1. NAVBAR FIX: Isko flexbox container banayenge taake items space le sakein */
+  .navbar {
+    padding: 15px 5% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    position: relative !important;
+  }
+
+  /* Logo text wrap control */
+  .navbar-logo {
+    font-size: 1.1rem !important;
+    flex: 1 !important; /* Logo ko thodi space dega */
+  }
+
+  /* Hamburger button ko position fix denge taake ye order mein end par jaye */
+  .hamburger {
+    display: flex !important;
+    order: 3 !important; /* Isko aakhri position par push karega */
+    margin-left: 15px !important; /* Schedule tour se dur rakhne ke liye gap */
+    z-index: 1001 !important;
+  }
+
+  /* Schedule Tour Button Configuration */
+  .navbar-cta-btn {
+    order: 2 !important; /* Isko center-right (logo aur hamburger ke beech) layega */
+    padding: 8px 14px !important;
+    font-size: 0.8rem !important;
+    white-space: nowrap !important; /* Text line break na ho */
+    margin: 0 !important;
+    display: inline-block !important;
+  }
+
+  /* 2. MOBILE DROPDOWN LINKS PANEL */
+  .navbar-links {
+    display: none !important; /* Default hidden */
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    width: 100% !important;
+    background-color: #ffffff !important;
+    padding: 15px 0 !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1) !important;
+    z-index: 1000 !important;
+    order: 4 !important; /* Menu khulne par sabse neche show hoga */
+  }
+
+  /* Trigger class via React state */
+  .navbar-links.show-mobile-menu {
+    display: flex !important;
+  }
+
+  .navbar-links .nav-item {
+    padding: 12px 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    text-align: center !important;
+    display: block !important;
+    border: none !important;
+    color: #333333 !important;
+  }
+
+  /* 3. HERO BUTTONS OVERLAP REPAIR (Explore & Book Consultation) */
+  /* Hero text container ke andar generic wrappers ko block orientation dena */
+  .hero-text, 
+  .hero-buttons-container,
+  .hero-text div {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 16px !important; /* Dono buttons ke darmiyan saaf 16px ka gap */
+    width: 100% !important;
+  }
+
+  /* Dono buttons ko independent stack banana */
+  .primary-btn, 
+  .secondary-btn,
+  .hero-text .primary-btn,
+  .hero-text .secondary-btn {
+    display: block !important;
+    width: 90% !important; /* Mobile par width auto scalable aur achhi dikhegi */
+    max-width: 280px !important;
+    margin: 0 !important; /* Purani overlaps padding/margin clear */
+    padding: 12px 0 !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+    position: relative !important; /* Kisi bhi absolute position ko control karne ke liye */
+  }
+}

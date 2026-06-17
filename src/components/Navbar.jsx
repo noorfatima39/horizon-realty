@@ -7,11 +7,12 @@ export default function Navbar() {
 
   return (
     <nav className="navbar">
+      {/* 1. LOGO */}
       <Link to="/" className="navbar-logo" onClick={() => setIsMenuOpen(false)}>
         <span className="logo-icon">▲</span> HORIZON <span className="logo-sub">REALTY</span>
       </Link>
 
-      {/* Hamburger Icon - Jo mobile screen par 3 lines show karega */}
+      {/* 2. HAMBURGER ICON (Mobile par teen lines show karega) */}
       <button 
         className={`hamburger ${isMenuOpen ? 'open' : ''}`} 
         onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -22,46 +23,26 @@ export default function Navbar() {
         <span className="bar"></span>
       </button>
 
-      {/* Links Layout - Ismein state check ho rahi hai */}
+      {/* 3. NAVIGATION LINKS DROPDOWN */}
       <div className={`navbar-links ${isMenuOpen ? 'show-mobile-menu' : ''}`}>
-        <NavLink 
-          to="/" 
-          end 
-          className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-          onClick={() => setIsMenuOpen(false)} // Link click hote hi menu close ho jaye
-        >
+        <NavLink to="/" end className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={() => setIsMenuOpen(false)}>
           Home
         </NavLink>
-        <NavLink 
-          to="/search" 
-          className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-          onClick={() => setIsMenuOpen(false)}
-        >
+        <NavLink to="/search" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={() => setIsMenuOpen(false)}>
           Buy/Rent
         </NavLink>
-        <NavLink 
-          to="/sell" 
-          className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-          onClick={() => setIsMenuOpen(false)}
-        >
+        <NavLink to="/sell" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={() => setIsMenuOpen(false)}>
           Sell
         </NavLink>
-        <NavLink 
-          to="/agents" 
-          className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-          onClick={() => setIsMenuOpen(false)}
-        >
+        <NavLink to="/agents" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={() => setIsMenuOpen(false)}>
           Our Team
         </NavLink>
-        <NavLink 
-          to="/blog" 
-          className={({ isActive }) => isActive ? "nav-item active" : "nav-item"}
-          onClick={() => setIsMenuOpen(false)}
-        >
+        <NavLink to="/blog" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={() => setIsMenuOpen(false)}>
           Market Insights
         </NavLink>
       </div>
 
+      {/* 4. SCHEDULE TOUR BUTTON */}
       <Link to="/search" className="navbar-cta-btn" onClick={() => setIsMenuOpen(false)}>
         Schedule Tour
       </Link>
